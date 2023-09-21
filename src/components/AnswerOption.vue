@@ -10,7 +10,7 @@ onMounted(() => setTimeout(() => (showMessafe.value = true)));
   <v-slide-y-transition>
     <div
       v-show="showMessafe"
-      class="shadow-sm shadow-white inline-block p-4 px-5 float-left m-2 hover:font-bold hover:cursor-pointer hover:shadow-sm hover:bg-gray-300 rounded-lg hover:bg-opacity-20"
+      class="shadow-sm shadow-white inline-block p-4 px-5 float-left m-1 hover:font-bold hover:cursor-pointer hover:shadow-sm hover:bg-gray-300 rounded-lg hover:bg-opacity-20"
     >
       {{ text }}
     </div>

@@ -8,6 +8,7 @@ import { ref } from "vue";
 import { IAnswer, HOUSES } from "../models/question.interface";
 import { IMessage } from "../models/messages.interface";
 import Modal from "./Modal.vue";
+import { computed } from "vue";
 
 const EMPTY_RES = {
   [HOUSES.g]: 0,
@@ -23,7 +24,6 @@ const showOptions = ref(false);
 const userName = ref();
 const chatDiv = ref<HTMLDivElement | null>(null);
 const totalQuestions = questions.length;
-const winningHouse = reactive<[string, number]>(["", 0]);
 
 const result = reactive<Record<HOUSES, number>>(EMPTY_RES);
 
@@ -41,10 +41,8 @@ const emit = defineEmits<{ (e: "finish"): void }>();
 
 const triggerNextMessage = () => {
   showOptions.value = true;
-  if (currentIndex.value - 1 === totalQuestions) {
+  if (currentIndex.value === totalQuestions - 1) {
     finished.value = true;
-    let maxValue = Object.entries(result).sort((x, y) => y[1] - x[1])[0];
-    winningHouse.push(...maxValue);
     messages.push({
       message: `Great ${userName.value} you finished! Check your results below`,
     });
@@ -81,11 +79,16 @@ const handleFinish = () => {
   reset();
   emit("finish");
 };
+
+const winningHouse = computed(() => {
+  let maxValue = Object.entries(result).sort((x, y) => y[1] - x[1])[0];
+  return { ...maxValue };
+});
 </script>
 
 <template>
   <div
-    class="mx-auto h-full p-6 px-8 md:w-3/5 text-xs md:text-sm bg-opacity-60 bg-slate-900 rounded-lg wrapper"
+    class="mx-auto h-full p-6 px-8 w-full md:w-3/5 text-xs md:text-sm bg-opacity-60 bg-slate-900 rounded-lg wrapper"
   >
     <div class="mt-auto">
       <TransitionGroup name="list" tag="div">

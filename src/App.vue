@@ -15,7 +15,7 @@ const finished = ref(false);
     <button
       v-if="!start"
       @click="start = !start"
-      class="p-4 px-10 rounded-full mt-10 bg-slate-300 text-zinc-900 hover:font-bold hover:text-hufflepuff hover:bg-griffindor"
+      class="p-4 md:px-10 rounded-full mt-10 bg-slate-300 text-zinc-900 hover:font-bold hover:text-hufflepuff hover:bg-griffindor"
     >
       {{ finished ? "start again" : "S T A R T " }}
     </button>

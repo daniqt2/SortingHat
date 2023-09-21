@@ -6,6 +6,8 @@ const { house, points, name } = defineProps<{
   points: number;
   name: string;
 }>();
+
+console.log("_------", house);
 const HOUSE_NAME = {
   [HOUSES.g]: { name: "GRIFFINDOR", bg: "bg-griffindor" },
   [HOUSES.s]: { name: "SLYTHERIN", bg: "bg-slythering" },
