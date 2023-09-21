@@ -23,7 +23,7 @@ const showOptions = ref(false);
 const userName = ref();
 const chatDiv = ref<HTMLDivElement | null>(null);
 const totalQuestions = questions.length;
-const winningHouse = reactive<[string, number]>([]);
+const winningHouse = reactive<[string, number]>(["", 0]);
 
 const result = reactive<Record<HOUSES, number>>(EMPTY_RES);
 

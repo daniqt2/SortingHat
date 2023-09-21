@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from "vue";
 import { HOUSES } from "../models/question.interface";
 const emit = defineEmits<{ (e: "finish"): void }>();
 const { house, points, name } = defineProps<{
