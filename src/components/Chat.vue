@@ -22,7 +22,6 @@ const currentIndex = ref(-1);
 const finished = ref(false);
 const showOptions = ref(false);
 const userName = ref();
-const chatDiv = ref<HTMLDivElement | null>(null);
 const totalQuestions = questions.length;
 
 const result = reactive<Record<HOUSES, number>>(EMPTY_RES);
@@ -49,7 +48,6 @@ const triggerNextMessage = () => {
   } else {
     currentIndex.value += 1;
     messages.push({ message: questions[currentIndex.value].title });
-    if (chatDiv.value) chatDiv.value.scrollTo({ top: 100 });
   }
 };
 
@@ -88,7 +86,7 @@ const winningHouse = computed(() => {
 
 <template>
   <div
-    class="mx-auto h-full p-6 px-8 w-full md:w-3/5 text-xs md:text-sm bg-opacity-60 bg-slate-900 rounded-lg wrapper"
+    class="mx-auto h-full p-6 px-8 w-full md:w-3/5 text-xs md:text-sm bg-opacity-60 bg-slate-900 rounded-lg wrapper sticky"
   >
     <div class="mt-auto">
       <TransitionGroup name="list" tag="div">
@@ -96,7 +94,7 @@ const winningHouse = computed(() => {
           <ChatMessage :message="message" @show="showOptions = !showOptions" />
         </div>
       </TransitionGroup>
-      <span v-if="showOptions">
+      <div v-if="showOptions">
         <div v-if="questions[currentIndex]?.answers && !finished">
           <AnswerOption
             v-for="option in questions[currentIndex].answers"
@@ -107,7 +105,7 @@ const winningHouse = computed(() => {
         <div v-else-if="!finished">
           <InputBox @send="updateFreeAnswer" />
         </div>
-      </span>
+      </div>
       <div class="mt-5" v-if="finished && winningHouse">
         <Modal
           @finish="handleFinish"
